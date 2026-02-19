@@ -15,7 +15,8 @@ export function renderRegisterPageHTML(jwtState: JwtSecretState | null): string 
   <style>
     :root {
       color-scheme: light;
-      --bg: #f3f4f6;
+      --grid-line: rgba(170, 170, 170, 0.34);
+      --grid-size: 30px;
       --card: #ffffff;
       --border: #d0d5dd;
       --text: #101828;
@@ -33,7 +34,12 @@ export function renderRegisterPageHTML(jwtState: JwtSecretState | null): string 
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
+      background-position: -1px -1px;
       color: var(--text);
       display: flex;
       align-items: center;
@@ -48,7 +54,7 @@ export function renderRegisterPageHTML(jwtState: JwtSecretState | null): string 
       border: 1px solid var(--border);
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: 0px 0px 20px 10px rgba(16, 24, 40, 0.08);
       display: flex;
       flex-direction: column;
       position: relative;
@@ -242,9 +248,9 @@ export function renderRegisterPageHTML(jwtState: JwtSecretState | null): string 
       height: 46px;
       padding: 0 16px;
       border-radius: 14px;
-      border: 1px solid #d5dae1;
-      background: #ffffff;
-      color: #111418;
+      border: 1px solid #c6ccd5;
+      background: #f6f7f9;
+      color: #1d2939;
       font-weight: 700;
       font-size: 15px;
       display: inline-flex;
@@ -253,13 +259,39 @@ export function renderRegisterPageHTML(jwtState: JwtSecretState | null): string 
       text-align: center;
       cursor: pointer;
       white-space: nowrap;
+      transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease, border-color 140ms ease;
+    }
+    .btn:hover {
+      background: #edf0f4;
+      border-color: #b8c0cc;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(16, 24, 40, 0.08);
+    }
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(16, 24, 40, 0.08);
     }
     .btn.primary {
       border-color: #111418;
       background: #111418;
       color: #ffffff;
     }
+    .btn.primary:hover {
+      background: #1f242b;
+      border-color: #1f242b;
+      box-shadow: 0 10px 22px rgba(16, 24, 40, 0.22);
+    }
+    .btn.primary:active {
+      background: #151a20;
+      border-color: #151a20;
+    }
     .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn:disabled:hover {
+      transform: none;
+      box-shadow: none;
+      background: inherit;
+      border-color: inherit;
+    }
 
     .mode-tabs { display: inline-flex; border: 1px solid #d5dae1; border-radius: 12px; overflow: hidden; }
     .mode-tab {
@@ -298,6 +330,19 @@ export function renderRegisterPageHTML(jwtState: JwtSecretState | null): string 
     }
     .flow-actions { display: flex; align-items: center; gap: 8px; width: 132px; }
     .flow-actions .btn { width: 120px; padding: 0; }
+
+    @media (max-width: 560px) {
+      .flow-bottom {
+        padding: 0;
+        gap: 10px;
+      }
+      .flow-actions {
+        width: calc(50% - 10px);
+      }
+      .flow-actions .btn {
+        width: 100%;
+      }
+    }
 
     .dots {
       display: inline-flex;
